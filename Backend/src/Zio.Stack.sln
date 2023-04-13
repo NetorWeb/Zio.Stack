@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroServices", "MicroServices", "{33964C41-34FF-4D0A-836F-59EF3D06DDF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{0710D19B-A521-4D5C-8100-7BE012759E7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{DB7A011F-2FBD-46B8-AEF1-9832BD7A1F1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{0B219635-5497-410E-8718-4D2179F68D3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{F0CF81E6-DD22-4603-9039-CD7100A052F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{66C4BE35-BBF9-42CB-B256-0D87DEE8EAAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{A82AB323-5573-414B-94F3-4A3EC557CF4D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "MicroServices\Identity\Identity.Api\Identity.Api.csproj", "{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0710D19B-A521-4D5C-8100-7BE012759E7C} = {33964C41-34FF-4D0A-836F-59EF3D06DDF5}
+		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5} = {0710D19B-A521-4D5C-8100-7BE012759E7C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95DC73E2-A891-4BDF-ADAE-4EB5EFA12169}
+	EndGlobalSection
+EndGlobal

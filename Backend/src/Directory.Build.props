@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup>
+		<MasaFrameworkPackageVersion>1.0.0-preview.28</MasaFrameworkPackageVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<SwashbucklePackageVersion>6.5.0</SwashbucklePackageVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<EFCorePackageVersion>7.0.5</EFCorePackageVersion>
+	</PropertyGroup>
+</Project>
