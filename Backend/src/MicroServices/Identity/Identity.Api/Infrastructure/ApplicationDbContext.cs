@@ -3,7 +3,6 @@ using Identity.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NETCore.Encrypt.Extensions;
 
 namespace Identity.Api.Infrastructure
 {
@@ -17,6 +16,9 @@ namespace Identity.Api.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            var ph = new MyPasswordHasher();
+
             builder.Entity<ApplicationUser>().ToTable("ApplicationUsers");
             builder.Entity<ApplicationUser>().HasData(
             new ApplicationUser()
@@ -24,7 +26,7 @@ namespace Identity.Api.Infrastructure
                 Id = Guid.NewGuid().ToString(),
                 RealName = "alice1",
                 UserName = "alice1",
-                PasswordHash = "alice1"
+                PasswordHash = ph.HashPassword(null, "123456")
             });
 
             #region 初始化用戶与角色的种子数据
@@ -57,8 +59,6 @@ namespace Identity.Api.Infrastructure
                 PhoneNumber = "123456789",
                 PhoneNumberConfirmed = false,
             };
-
-            var ph = new MyPasswordHasher();
             adminUser.PasswordHash = ph.HashPassword(adminUser, "123456");
 
             builder.Entity<ApplicationUser>().HasData(adminUser);

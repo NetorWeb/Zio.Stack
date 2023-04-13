@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230413073241_Initdb")]
-    partial class Initdb
+    [Migration("20230413080057_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,9 +116,9 @@ namespace Identity.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "49b914fe-8b24-4727-b616-8183489429a4",
+                            Id = "7d284986-ad77-421c-9c10-c6a280a6c471",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "30d5aebb-976f-4385-a7ee-d1bf1f1945c0",
+                            ConcurrencyStamp = "0563ba3f-1d00-4a0a-8f37-fe5751073dde",
                             CreateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatorId = "",
                             Deleted = false,
@@ -126,10 +126,10 @@ namespace Identity.Api.Migrations
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             OtherData = "",
-                            PasswordHash = "alice1",
+                            PasswordHash = "E10ADC3949BA59ABBE56E057F20F883E",
                             PhoneNumberConfirmed = false,
                             RealName = "alice1",
-                            SecurityStamp = "345c110e-db4d-400a-a4ee-8961c2c31c64",
+                            SecurityStamp = "0bd18314-3361-41b7-9762-4da1bfb129ed",
                             Sex = 0,
                             TwoFactorEnabled = false,
                             UserName = "alice1"
@@ -138,7 +138,7 @@ namespace Identity.Api.Migrations
                         {
                             Id = "f8df1775-e889-46f4-acdd-421ec8d9ba65",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "adf957eb-7ba2-42bc-b50a-0cc1a82004b1",
+                            ConcurrencyStamp = "353919ab-0f31-46d8-89b2-272f6ad0fbd1",
                             CreateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatorId = "",
                             Deleted = false,
@@ -153,7 +153,7 @@ namespace Identity.Api.Migrations
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = false,
                             RealName = "admin",
-                            SecurityStamp = "19a18b3c-a607-440a-850b-87a69f65cde1",
+                            SecurityStamp = "2505f61b-3485-4308-8c42-691a7161b8d8",
                             Sex = 0,
                             TwoFactorEnabled = false,
                             UserName = "admin"

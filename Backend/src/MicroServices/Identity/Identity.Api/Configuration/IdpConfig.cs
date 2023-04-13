@@ -1,10 +1,34 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 
 namespace Identity.Api.Configuration
 {
     public static class IdpConfig
     {
+        /// <summary>
+        /// 定义哪些用户将使用这个IdentityServer
+        /// </summary>
+        /// <returns></returns>
+        //public static IEnumerable<TestUser> GetUsers()
+        //{
+        //    return new[]
+        //    {
+        //        new TestUser
+        //        {
+        //             SubjectId="10000",
+        //            Username = "ZongYu1119",
+        //            Password = "12345"
+        //        },
+        //        new TestUser
+        //        {
+        //             SubjectId="10001",
+        //             Username ="Admin",
+        //              Password ="12345"
+        //        }
+        //    };
+        //}
+
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new IdentityResource[]
@@ -39,11 +63,11 @@ namespace Identity.Api.Configuration
                 new Client
                 {
                     ClientId = "client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
+                        {
+                            new Secret("secret".Sha256())
+                        },
                     AllowedScopes = //允许当访问的资源
                     {
                         "appcollect",

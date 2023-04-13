@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Identity.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Initdb : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -236,8 +236,8 @@ namespace Identity.Api.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Birthday", "ConcurrencyStamp", "CreateTime", "CreatorId", "Deleted", "DepartmentId", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OtherData", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RealName", "SecurityStamp", "Sex", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "49b914fe-8b24-4727-b616-8183489429a4", 0, null, "30d5aebb-976f-4385-a7ee-d1bf1f1945c0", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", null, false, false, null, null, null, "", "alice1", null, false, "alice1", "345c110e-db4d-400a-a4ee-8961c2c31c64", 0, false, "alice1" },
-                    { "f8df1775-e889-46f4-acdd-421ec8d9ba65", 0, null, "adf957eb-7ba2-42bc-b50a-0cc1a82004b1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "admin@qq.com", true, false, null, "ADMIN@QQ.COM", "ADMIN", "", "E10ADC3949BA59ABBE56E057F20F883E", "123456789", false, "admin", "19a18b3c-a607-440a-850b-87a69f65cde1", 0, false, "admin" }
+                    { "7d284986-ad77-421c-9c10-c6a280a6c471", 0, null, "0563ba3f-1d00-4a0a-8f37-fe5751073dde", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", null, false, false, null, null, null, "", "E10ADC3949BA59ABBE56E057F20F883E", null, false, "alice1", "0bd18314-3361-41b7-9762-4da1bfb129ed", 0, false, "alice1" },
+                    { "f8df1775-e889-46f4-acdd-421ec8d9ba65", 0, null, "353919ab-0f31-46d8-89b2-272f6ad0fbd1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "admin@qq.com", true, false, null, "ADMIN@QQ.COM", "ADMIN", "", "E10ADC3949BA59ABBE56E057F20F883E", "123456789", false, "admin", "2505f61b-3485-4308-8c42-691a7161b8d8", 0, false, "admin" }
                 });
 
             migrationBuilder.InsertData(

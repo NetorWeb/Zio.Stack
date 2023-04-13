@@ -1,4 +1,5 @@
 using Identity.Api.Middleware;
+using Masa.BuildingBlocks.Service.MinimalAPIs;
 
 namespace Identity.Api
 {
@@ -9,6 +10,9 @@ namespace Identity.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
 
             builder.Services.AddCustomIdentityServer(builder.Configuration);
 
@@ -27,6 +31,8 @@ namespace Identity.Api
             app.UseHttpsRedirection();
 
             app.UseCustomIdentityServer();
+
+            app.UseAuthorization();
 
             if (app.Environment.IsDevelopment())
             {
