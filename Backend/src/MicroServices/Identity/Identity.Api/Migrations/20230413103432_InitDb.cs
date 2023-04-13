@@ -236,8 +236,8 @@ namespace Identity.Api.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Birthday", "ConcurrencyStamp", "CreateTime", "CreatorId", "Deleted", "DepartmentId", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "OtherData", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RealName", "SecurityStamp", "Sex", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "7d284986-ad77-421c-9c10-c6a280a6c471", 0, null, "0563ba3f-1d00-4a0a-8f37-fe5751073dde", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", null, false, false, null, null, null, "", "E10ADC3949BA59ABBE56E057F20F883E", null, false, "alice1", "0bd18314-3361-41b7-9762-4da1bfb129ed", 0, false, "alice1" },
-                    { "f8df1775-e889-46f4-acdd-421ec8d9ba65", 0, null, "353919ab-0f31-46d8-89b2-272f6ad0fbd1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "admin@qq.com", true, false, null, "ADMIN@QQ.COM", "ADMIN", "", "E10ADC3949BA59ABBE56E057F20F883E", "123456789", false, "admin", "2505f61b-3485-4308-8c42-691a7161b8d8", 0, false, "admin" }
+                    { "f8df1775-e889-46f4-acdd-421ec8d9ba65", 0, null, "944f44a7-66e5-4f27-a588-a3810f019dce", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "admin@qq.com", true, false, null, "ADMIN@QQ.COM", "ADMIN", "", "AQAAAAIAAYagAAAAEB85aEOcdz6x9cHNYaAhi2PUToPa8laVMUSfRpGmYF8TvLhP77wUTZ47UEpcy7x2Aw==", "123456789", false, "admin", "4a76ca9d-8e46-4562-96b8-f236c96a8edd", 0, false, "admin" },
+                    { "f8df1775-e889-46f4-acdd-421ec8d9ba66", 0, null, "35c5a783-6cee-49f9-9274-1771899c1610", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", null, false, false, null, null, "ZSP", "", "AQAAAAIAAYagAAAAEIBpYBsmY/QcomAoYUyoazD1sjRdiIsH6RSII8VQWbERs3DjBP1gFH+dObCzULkqqg==", null, false, "zsp", "08fd9dd9-7b84-4a9b-b3d6-d5355b1fa23f", 0, false, "zsp" }
                 });
 
             migrationBuilder.InsertData(

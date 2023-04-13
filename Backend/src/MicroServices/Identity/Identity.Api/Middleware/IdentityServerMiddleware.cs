@@ -1,6 +1,7 @@
 ﻿using Identity.Api.Configuration;
 using Identity.Api.Infrastructure;
 using Identity.Api.Models;
+using Masa.BuildingBlocks.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +12,6 @@ namespace Identity.Api.Middleware
         public static IServiceCollection AddCustomIdentityServer(this IServiceCollection services, IConfiguration configuration)
         {
             //var migrationAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
-
-
 
             services.AddDbContext<ApplicationDbContext>(opt =>
             {
@@ -34,7 +33,7 @@ namespace Identity.Api.Middleware
                 .AddInMemoryIdentityResources(IdpConfig.GetIdentityResources())
                 .AddInMemoryClients(IdpConfig.GetClients(configuration))
                 .AddInMemoryApiScopes(IdpConfig.GetScope())
-                .AddInMemoryApiResources(IdpConfig.GetApiResources())    
+                .AddInMemoryApiResources(IdpConfig.GetApiResources())
                 .AddResourceOwnerValidator<MyResourceOwnerPasswordValidator<ApplicationUser>>() //这句可以打开自主验证登录用户
                 //.AddProfileService<MyProfileService>()
                 .AddAspNetIdentity<ApplicationUser>()

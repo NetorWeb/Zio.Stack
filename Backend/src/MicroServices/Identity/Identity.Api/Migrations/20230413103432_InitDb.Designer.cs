@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230413080057_InitDb")]
+    [Migration("20230413103432_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -116,29 +116,9 @@ namespace Identity.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7d284986-ad77-421c-9c10-c6a280a6c471",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0563ba3f-1d00-4a0a-8f37-fe5751073dde",
-                            CreateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatorId = "",
-                            Deleted = false,
-                            DepartmentId = "",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            OtherData = "",
-                            PasswordHash = "E10ADC3949BA59ABBE56E057F20F883E",
-                            PhoneNumberConfirmed = false,
-                            RealName = "alice1",
-                            SecurityStamp = "0bd18314-3361-41b7-9762-4da1bfb129ed",
-                            Sex = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "alice1"
-                        },
-                        new
-                        {
                             Id = "f8df1775-e889-46f4-acdd-421ec8d9ba65",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "353919ab-0f31-46d8-89b2-272f6ad0fbd1",
+                            ConcurrencyStamp = "944f44a7-66e5-4f27-a588-a3810f019dce",
                             CreateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatorId = "",
                             Deleted = false,
@@ -149,14 +129,35 @@ namespace Identity.Api.Migrations
                             NormalizedEmail = "ADMIN@QQ.COM",
                             NormalizedUserName = "ADMIN",
                             OtherData = "",
-                            PasswordHash = "E10ADC3949BA59ABBE56E057F20F883E",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB85aEOcdz6x9cHNYaAhi2PUToPa8laVMUSfRpGmYF8TvLhP77wUTZ47UEpcy7x2Aw==",
                             PhoneNumber = "123456789",
                             PhoneNumberConfirmed = false,
                             RealName = "admin",
-                            SecurityStamp = "2505f61b-3485-4308-8c42-691a7161b8d8",
+                            SecurityStamp = "4a76ca9d-8e46-4562-96b8-f236c96a8edd",
                             Sex = 0,
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "f8df1775-e889-46f4-acdd-421ec8d9ba66",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "35c5a783-6cee-49f9-9274-1771899c1610",
+                            CreateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatorId = "",
+                            Deleted = false,
+                            DepartmentId = "",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ZSP",
+                            OtherData = "",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIBpYBsmY/QcomAoYUyoazD1sjRdiIsH6RSII8VQWbERs3DjBP1gFH+dObCzULkqqg==",
+                            PhoneNumberConfirmed = false,
+                            RealName = "zsp",
+                            SecurityStamp = "08fd9dd9-7b84-4a9b-b3d6-d5355b1fa23f",
+                            Sex = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "zsp"
                         });
                 });
 

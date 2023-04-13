@@ -63,7 +63,7 @@ namespace Identity.Api.Configuration
                 new Client
                 {
                     ClientId = "client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets =
                         {
                             new Secret("secret".Sha256())

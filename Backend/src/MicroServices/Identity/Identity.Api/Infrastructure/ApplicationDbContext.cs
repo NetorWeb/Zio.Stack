@@ -17,17 +17,9 @@ namespace Identity.Api.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            var ph = new MyPasswordHasher();
+            var ph = new PasswordHasher<ApplicationUser>();
 
             builder.Entity<ApplicationUser>().ToTable("ApplicationUsers");
-            builder.Entity<ApplicationUser>().HasData(
-            new ApplicationUser()
-            {
-                Id = Guid.NewGuid().ToString(),
-                RealName = "alice1",
-                UserName = "alice1",
-                PasswordHash = ph.HashPassword(null, "123456")
-            });
 
             #region 初始化用戶与角色的种子数据
             //1. 更新用戶与角色的外鍵
@@ -46,7 +38,7 @@ namespace Identity.Api.Infrastructure
             );
             //3. 添加用户
             var adminUserId = "f8df1775-e889-46f4-acdd-421ec8d9ba65";
-            ApplicationUser adminUser = new ApplicationUser
+            var adminUser = new ApplicationUser
             {
                 Id = adminUserId,
                 UserName = "admin",
@@ -62,6 +54,19 @@ namespace Identity.Api.Infrastructure
             adminUser.PasswordHash = ph.HashPassword(adminUser, "123456");
 
             builder.Entity<ApplicationUser>().HasData(adminUser);
+
+            var userId = "f8df1775-e889-46f4-acdd-421ec8d9ba66";
+            var user = new ApplicationUser
+            {
+                Id = userId,
+                UserName = "zsp",
+                RealName = "zsp",
+                NormalizedUserName="zsp".ToUpper()
+            };
+            user.PasswordHash = ph.HashPassword(user, "526688");
+
+            builder.Entity<ApplicationUser>().HasData(user);
+
             //4. 给用户加入管理员角色
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string>()
