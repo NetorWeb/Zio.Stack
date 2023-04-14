@@ -1,8 +1,10 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Identity.Api.Configuration.Consts;
 using Identity.Api.Infrastructure.SeedData;
 using Identity.Api.Middleware;
+using Identity.Api.Services.Account;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 
 namespace Identity.Api
 {
@@ -15,6 +17,8 @@ namespace Identity.Api
 
             // Add services to the container.
 
+            builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+            builder.Services.AddScoped<IValidator<LoginInputModel>, LoginInputModelValidator>();
             //注册认证策略
             builder.Services.AddAuthorization(options =>
             {
@@ -24,9 +28,6 @@ namespace Identity.Api
                     policy => policy.RequireAuthenticatedUser());
             });
 
-            //添加认证过滤
-            builder.Services.ConfigAuthentication(builder.Configuration);
-
             builder.Services.AddCustomIdentity(builder.Configuration);
 
             builder.Services.AddCustomIdentityServer(builder.Configuration);
@@ -34,14 +35,23 @@ namespace Identity.Api
             builder.Services.AddMasaMinimalAPIs(options =>
             {
                 options.PluralizeServiceName = false;
+                options.RouteHandlerBuilder = builder =>
+                {
+                    builder.RequireAuthorization();
+                };
             });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //添加认证过滤
+            builder.Services.ConfigAuthentication(builder.Configuration);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+
+            app.UseCookiePolicy();
 
             app.UseHttpsRedirection();
 

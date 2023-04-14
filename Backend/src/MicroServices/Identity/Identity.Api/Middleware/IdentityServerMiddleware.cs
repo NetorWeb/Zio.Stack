@@ -14,6 +14,8 @@ namespace Identity.Api.Middleware
 
             services.AddIdentityServer(options =>
             {
+                options.IssuerUri = "null";
+                options.Authentication.CookieLifetime = TimeSpan.FromHours(2);
 
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
