@@ -7,9 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Cnblogs.IdentityServer4.EntityFramework" Version="4.2.1" />
 		<PackageReference Include="IdentityServer4" Version="4.1.2" />
+		<PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
 		<PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
-		<PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
 		<PackageReference Include="Masa.Contrib.Service.MinimalAPIs" Version="$(MasaFrameworkPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCorePackageVersion)" />
@@ -24,6 +25,10 @@
 		<PackageReference Include="NETCore.Encrypt" Version="2.1.1" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="$(SwashbucklePackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>
