@@ -28,6 +28,11 @@ public class AccountService : ServiceBase
     [RoutePattern(HttpMethod = "Post")]
     public async Task<IResult> Login([FromServices]IValidator<LoginInputModel> validator, [FromBody] LoginInputModel model)
     {
+        var vResult = await validator.ValidateAsync(model);
+
+        if(!vResult.IsValid)
+            return Results.BadRequest(vResult.Errors);
+
         var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
 
         var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberLogin, lockoutOnFailure: true);
