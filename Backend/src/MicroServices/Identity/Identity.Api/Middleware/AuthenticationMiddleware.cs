@@ -10,31 +10,30 @@ namespace Identity.Api.Middleware
     {
         public static void ConfigAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication();
+            services.AddAuthentication()
+             .AddJwtBearer("Bearer", options =>
+             {
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            // .AddJwtBearer("Bearer", options =>
-            // {
-
-            //     var configUrl = configuration.GetSection("IdentityServer4")["authUrls"];
-            //     options.Authority = configUrl;
-            //     options.RequireHttpsMetadata = false;
-            //     options.Audience = configuration.GetSection("IdentityServer4")["Audience"];
+                 var configUrl = configuration.GetSection("IdentityServer4")["authUrls"];
+                 options.Authority = configUrl;
+                 options.RequireHttpsMetadata = false;
+                 options.Audience = configuration.GetSection("IdentityServer4")["Audience"];
 
 
-            //     options.TokenValidationParameters = new TokenValidationParameters
-            //     {
-            //         SaveSigninToken = true,
-            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret")),
-            //         ValidateLifetime = true,
-            //         RoleClaimType = "role",
-            //         ValidateAudience = false
-            //     };
-            //     IdentityModelEventSource.ShowPII = true;
-            // });
-            // API授权
+                 options.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     SaveSigninToken = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret")),
+                     ValidateLifetime = true,
+                     RoleClaimType = "role",
+                     ValidateAudience = false
+                 };
+                 IdentityModelEventSource.ShowPII = true;
+             });
+            //API授权
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("IdentityServer", policy =>

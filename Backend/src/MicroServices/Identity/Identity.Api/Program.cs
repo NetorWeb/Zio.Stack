@@ -1,9 +1,6 @@
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using Identity.Api.Configuration.Consts;
 using Identity.Api.Infrastructure.SeedData;
 using Identity.Api.Middleware;
-using Identity.Api.Services.Account;
 using Microsoft.OpenApi.Models;
 
 namespace Identity.Api
@@ -15,10 +12,11 @@ namespace Identity.Api
 
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.AddCustomConfiguration();
+
             // Add services to the container.
 
-            builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
-            builder.Services.AddScoped<IValidator<LoginInputModel>, LoginInputModelValidator>();
+            //builder.Services.AddCustomFluentValidatation();
             //×¢²áÈÏÖ¤²ßÂÔ
             builder.Services.AddAuthorization(options =>
             {
@@ -28,18 +26,13 @@ namespace Identity.Api
                     policy => policy.RequireAuthenticatedUser());
             });
 
+            builder.Services.AddSameSiteCookiePolicy();
+
             builder.Services.AddCustomIdentity(builder.Configuration);
 
             builder.Services.AddCustomIdentityServer(builder.Configuration);
 
-            builder.Services.AddMasaMinimalAPIs(options =>
-            {
-                options.PluralizeServiceName = false;
-                options.RouteHandlerBuilder = builder =>
-                {
-                    builder.RequireAuthorization();
-                };
-            });
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -51,14 +44,22 @@ namespace Identity.Api
 
             // Configure the HTTP request pipeline.
 
+            app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
+            app.UseRouting();
+
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAnyDomain");
+
 
             app.UseCustomIdentityServer();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             if (app.Environment.IsDevelopment())
             {
@@ -79,7 +80,7 @@ namespace Identity.Api
                 });
             }
 
-            app.MapMasaMinimalAPIs();
+            app.MapControllers();
 
             try
             {
