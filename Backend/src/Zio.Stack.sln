@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "MicroServices\Identity\Identity.Api\Identity.Api.csproj", "{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log.Serilog", "BuildingBlocks\Log.Serilog\Log.Serilog.csproj", "{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0710D19B-A521-4D5C-8100-7BE012759E7C} = {33964C41-34FF-4D0A-836F-59EF3D06DDF5}
 		{96B0D5B9-68C0-4E25-8AD7-DEF57DD9D6B5} = {0710D19B-A521-4D5C-8100-7BE012759E7C}
+		{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8} = {0B219635-5497-410E-8718-4D2179F68D3C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95DC73E2-A891-4BDF-ADAE-4EB5EFA12169}

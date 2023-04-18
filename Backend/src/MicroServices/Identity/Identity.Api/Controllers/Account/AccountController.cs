@@ -11,6 +11,7 @@ using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using ILogger = Serilog.ILogger;
 
 namespace Identity.Api.Controllers.Account
 {
@@ -24,6 +25,7 @@ namespace Identity.Api.Controllers.Account
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IClientStore _clientStore;
 
+        private readonly ILogger<AccountController> _logger;
 
 
         public AccountController(
@@ -32,7 +34,8 @@ namespace Identity.Api.Controllers.Account
             IEventService events,
             IIdentityServerInteractionService interaction,
             IAuthenticationSchemeProvider schemeProvider,
-            IClientStore clientStore
+            IClientStore clientStore,
+            ILogger<AccountController> logger
             )
         {
             _signInManager = signInManager;
@@ -41,6 +44,7 @@ namespace Identity.Api.Controllers.Account
             _interaction = interaction;
             _schemeProvider = schemeProvider;
             _clientStore = clientStore;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -188,6 +192,8 @@ namespace Identity.Api.Controllers.Account
         [HttpGet]
         public IActionResult Auth()
         {
+            _logger.LogInformation("Signin");
+            var user = HttpContext.User;
             return Content("Signin");
         }
 

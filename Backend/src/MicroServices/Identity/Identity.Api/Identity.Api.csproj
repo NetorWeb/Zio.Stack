@@ -36,4 +36,8 @@
 	  <Folder Include="wwwroot\images\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\BuildingBlocks\Log.Serilog\Log.Serilog.csproj" />
+	</ItemGroup>
+
 </Project>

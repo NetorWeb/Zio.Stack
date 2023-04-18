@@ -1,6 +1,7 @@
 using Identity.Api.Configuration.Consts;
 using Identity.Api.Infrastructure.SeedData;
 using Identity.Api.Middleware;
+using Log.Serilog.Middleware;
 using Microsoft.OpenApi.Models;
 
 namespace Identity.Api
@@ -13,6 +14,8 @@ namespace Identity.Api
             var builder = WebApplication.CreateBuilder(args);
 
             builder.AddCustomConfiguration();
+
+            var log = builder.AddCustomSerilog();
 
             // Add services to the container.
 
@@ -87,15 +90,16 @@ namespace Identity.Api
                 var seed = args.Contains("seed");
                 if (seed)
                 {
-                    args = args.Except(new[] { "seed" }).ToArray();
+                    log.Information("添加种子数据...");
+                    //args = args.Except(new[] { "seed" }).ToArray();
 
                     var seedData = new EnsureSeedData();
                     seedData.EnsureSeedDataAsync(app.Services).Wait();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                log.Error(ex, "添加种子数据出错!");
                 throw;
             }
 
