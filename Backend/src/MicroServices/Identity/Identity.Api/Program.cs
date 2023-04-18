@@ -50,7 +50,7 @@ namespace Identity.Api
 
             app.UseRouting();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseCors("AllowAnyDomain");
 
