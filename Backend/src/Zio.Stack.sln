@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppCollect", "AppCollect", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCollect.Api", "MicroServices\AppCollect\AppCollect.Api\AppCollect.Api.csproj", "{22A867C0-B804-40BF-9374-E28AD4B73B41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCollect.Domain", "MicroServices\AppCollect\AppCollect.Domain\AppCollect.Domain.csproj", "{FA7A5CD5-E917-4876-AD12-A7FABB69E815}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{22A867C0-B804-40BF-9374-E28AD4B73B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22A867C0-B804-40BF-9374-E28AD4B73B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22A867C0-B804-40BF-9374-E28AD4B73B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7A5CD5-E917-4876-AD12-A7FABB69E815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7A5CD5-E917-4876-AD12-A7FABB69E815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7A5CD5-E917-4876-AD12-A7FABB69E815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7A5CD5-E917-4876-AD12-A7FABB69E815}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 		{7D12F323-D2D9-4553-B2AA-4F49C4B7A0A8} = {0B219635-5497-410E-8718-4D2179F68D3C}
 		{023E5D9F-13BB-4FD8-88D4-B3D69579F7AB} = {33964C41-34FF-4D0A-836F-59EF3D06DDF5}
 		{22A867C0-B804-40BF-9374-E28AD4B73B41} = {023E5D9F-13BB-4FD8-88D4-B3D69579F7AB}
+		{FA7A5CD5-E917-4876-AD12-A7FABB69E815} = {023E5D9F-13BB-4FD8-88D4-B3D69579F7AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95DC73E2-A891-4BDF-ADAE-4EB5EFA12169}

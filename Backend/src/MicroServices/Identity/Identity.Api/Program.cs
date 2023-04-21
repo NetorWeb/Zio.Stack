@@ -19,16 +19,6 @@ namespace Identity.Api
 
             // Add services to the container.
 
-            //builder.Services.AddCustomFluentValidatation();
-            //注册认证策略
-            builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy(PolicyConst.Admin,
-                        policy => policy.RequireAssertion(c => c.User.IsInRole("Administrator")));
-                options.AddPolicy(PolicyConst.Manager,
-                    policy => policy.RequireAuthenticatedUser());
-            });
-
             builder.Services.AddSameSiteCookiePolicy();
 
             builder.Services.AddCustomIdentity(builder.Configuration);
@@ -37,8 +27,7 @@ namespace Identity.Api
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddCustomSwagger(builder.Configuration);
 
             //添加认证过滤
             builder.Services.ConfigAuthentication(builder.Configuration);
@@ -77,9 +66,9 @@ namespace Identity.Api
                 {
 
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "KnowledgeBaseAPI");
-                    //c.IndexStream = () => typeof(Program).GetTypeInfo().Assembly.GetManifestResourceStream("swaggerIndex.html");
                     c.RoutePrefix = "doc";
-                    c.OAuthClientId("IdentityServer4");
+                    c.OAuthClientId("identityswaggerui");
+                    c.OAuthAppName("Identity Swagger UI");
                 });
             }
 
@@ -95,6 +84,8 @@ namespace Identity.Api
 
                     var seedData = new EnsureSeedData();
                     seedData.EnsureSeedDataAsync(app.Services).Wait();
+                    
+                    log.Information("添加种子数据完毕");
                 }
             }
             catch (Exception ex)

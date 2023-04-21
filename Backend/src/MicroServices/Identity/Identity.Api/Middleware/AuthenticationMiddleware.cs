@@ -16,30 +16,19 @@ namespace Identity.Api.Middleware
             services.AddAuthentication()
              .AddJwtBearer("Bearer", options =>
              {
-
                  var configUrl = configuration.GetSection("IdentityServer4")["authUrls"];
                  options.Authority = configUrl;
                  options.RequireHttpsMetadata = false;
                  options.Audience = configuration.GetSection("IdentityServer4")["Audience"];
-
-
-                 options.TokenValidationParameters = new TokenValidationParameters
-                 {
-                     SaveSigninToken = true,
-                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret")),
-                     ValidateLifetime = true,
-                     RoleClaimType = "role",
-                     ValidateAudience = false
-                 };
-                 IdentityModelEventSource.ShowPII = true;
+                 options.TokenValidationParameters.ValidateAudience = false;
              });
             //API授权
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("IdentityServer", policy =>
+                options.AddPolicy("ApiScope", policy =>
                 {
                     policy.RequireAuthenticatedUser();
-                    policy.RequireClaim("scope", "IdentityServer");
+                    policy.RequireClaim("scope", "identityapi");
                 });
             });
         }

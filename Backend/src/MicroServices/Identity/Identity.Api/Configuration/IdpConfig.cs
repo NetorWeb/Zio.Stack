@@ -6,38 +6,12 @@ namespace Identity.Api.Configuration
 {
     public static class IdpConfig
     {
-        /// <summary>
-        /// 定义哪些用户将使用这个IdentityServer
-        /// </summary>
-        /// <returns></returns>
-        //public static IEnumerable<TestUser> GetUsers()
-        //{
-        //    return new[]
-        //    {
-        //        new TestUser
-        //        {
-        //             SubjectId="10000",
-        //            Username = "ZongYu1119",
-        //            Password = "12345"
-        //        },
-        //        new TestUser
-        //        {
-        //             SubjectId="10001",
-        //             Username ="Admin",
-        //              Password ="12345"
-        //        }
-        //    };
-        //}
-
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-                new IdentityResources.Address(),
-                new IdentityResources.Phone(),
-                new IdentityResources.Email(),
+                new IdentityResources.Profile()
             };
         }
 
@@ -45,16 +19,22 @@ namespace Identity.Api.Configuration
         {
             return new[]
             {
-                new ApiResource("appcollect", "App Collect Service" , new List<string> {JwtClaimTypes.Role})
+                new ApiResource("identityapi","IdentityServer Manager")
                 {
-                    Scopes = { "appcollect" }
+                    Scopes = {"identityapi"}
+                },
+                new ApiResource("appcollect", "AppCollect Service")
+                {
+                    Scopes = {"appcollect"}
                 }
             };
         }
 
         public static IEnumerable<ApiScope> GetApiScopes()
         {
-            return new ApiScope[] {
+            return new ApiScope[]
+            {
+                new ApiScope("identityapi", "IdentityServer Manager"),
                 new ApiScope("appcollect", "App Collect Service")
             };
         }
@@ -65,38 +45,99 @@ namespace Identity.Api.Configuration
             {
                 new Client
                 {
-                    ClientId = "client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                    ClientSecrets =
+                    ClientId = "spa",
+                    ClientName = "SPA OpenId Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { $"{configuration["SpaClient"]}/" },
+                    RequireConsent = false,
+                    PostLogoutRedirectUris = { $"{configuration["SpaClient"]}/" },
+                    AllowedCorsOrigins = { $"{configuration["SpaClient"]}/" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "appcollect"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "webrazorpage",
+                    ClientName = "Web RazorPage client",
+                    ClientSecrets = new List<Secret>()
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "appcollect",
+                    ClientUri = $"{configuration["WebRazorPageClient"]}",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowAccessTokensViaBrowser = false,
+                    RequireConsent = false,
+                    AllowOfflineAccess = true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+                    RequirePkce = false,
+                    RedirectUris = new List<string>()
+                    {
+                        $"{configuration["WebRazorPageClient"]}/signin-oidc"
+                    },
+                    PostLogoutRedirectUris = new List<string>()
+                    {
+                        $"{configuration["WebRazorPageClient"]}/signout-callback-oidc"
+                    },
+                    AllowedScopes = new List<string>()
+                    {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Email,
-                        IdentityServerConstants.StandardScopes.Address,
-                        IdentityServerConstants.StandardScopes.Phone,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "appcollect"
                     }
                 },
-
                 new Client
                 {
-                    ClientId = "ro.client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    ClientSecrets =
-                        {
-                            new Secret("secret".Sha256())
-                        },
-                    AllowedScopes = //允许当访问的资源
+                    ClientId = "app",
+                    ClientName = "App OpenId Client",
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    ClientSecrets = new List<Secret>()
                     {
-                        "appcollect",
+                        new Secret("secret".Sha256())
+                    },
+                    RedirectUris = { configuration["AppClientCallback"] },
+                    RequireConsent = false,
+                    RequirePkce = true,
+                    PostLogoutRedirectUris = { $"{configuration["AppClientCallback"]}/Account/Redirecting" },
+                    AllowedScopes = new List<string>()
+                    {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Email,
-                        IdentityServerConstants.StandardScopes.Address,
-                        IdentityServerConstants.StandardScopes.Phone,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "appcollect"
+                    },
+                    AllowAccessTokensViaBrowser = true,
+                    AllowOfflineAccess = true
+                },
+                new Client
+                {
+                    ClientId = "appcollectswaggerui",
+                    ClientName = "AppCollect Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { $"{configuration["AppCollectApiClient"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{configuration["AppCollectApiClient"]}/swagger/" },
+                    AllowedScopes =
+                    {
+                        "appcollect"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "identityswaggerui",
+                    ClientName = "Identity Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { $"{configuration["IdentityServer4:authUrls"]}/doc/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{configuration["IdentityServer4:authUrls"]}/doc/" },
+                    AllowedScopes =
+                    {
+                        "identityapi"
                     }
                 }
             };

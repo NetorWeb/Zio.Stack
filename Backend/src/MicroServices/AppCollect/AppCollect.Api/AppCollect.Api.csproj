@@ -7,16 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+        <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\Log.Serilog\Log.Serilog.csproj" />
+      <ProjectReference Include="..\AppCollect.Domain\AppCollect.Domain.csproj" />
     </ItemGroup>
 
 </Project>

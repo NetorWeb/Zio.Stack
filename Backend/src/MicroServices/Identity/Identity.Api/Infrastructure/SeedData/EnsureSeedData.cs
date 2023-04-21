@@ -10,12 +10,14 @@ namespace Identity.Api.Infrastructure.SeedData
     {
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<ApplicationRole> _roleManager;
+        private ILogger<EnsureSeedData> _logger;
 
         public async Task EnsureSeedDataAsync(IServiceProvider services)
         {
             using var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope();
             _userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             _roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            _logger = scope.ServiceProvider.GetRequiredService<ILogger<EnsureSeedData>>();
 
             await EnsureIdentitySeedAsync();
             await EnsureIdentityServerSeedAsync(scope.ServiceProvider);
@@ -25,7 +27,9 @@ namespace Identity.Api.Infrastructure.SeedData
         {
             if (await _roleManager.FindByNameAsync(AuthorizationConsts.AdministrationRole) == null)
             {
-                var role = new ApplicationRole() { Name = AuthorizationConsts.AdministrationRole, NormalizedName = "Administrator" };
+                _logger.LogInformation("初始化默认角色：{Role}", AuthorizationConsts.AdministrationRole);
+                var role = new ApplicationRole()
+                    { Name = AuthorizationConsts.AdministrationRole, NormalizedName = "Administrator" };
                 var result = await _roleManager.CreateAsync(role);
                 if (!result.Succeeded)
                 {
@@ -35,6 +39,7 @@ namespace Identity.Api.Infrastructure.SeedData
 
             if (await _userManager.FindByNameAsync(AuthorizationConsts.AdministrationUser) == null)
             {
+                _logger.LogInformation("初始化默认用户：{User}", AuthorizationConsts.AdministrationUser);
                 var defaultUser = new ApplicationUser
                 {
                     UserName = AuthorizationConsts.AdministrationUser,
@@ -49,6 +54,7 @@ namespace Identity.Api.Infrastructure.SeedData
                 {
                     throw new Exception("初始默认用户失败");
                 }
+
                 await _userManager.AddToRoleAsync(defaultUser, AuthorizationConsts.AdministrationRole);
             }
         }
@@ -60,41 +66,59 @@ namespace Identity.Api.Infrastructure.SeedData
             services.GetRequiredService<CustomPersistedGrantDbContext>().Database.Migrate();
             var configurationDbContext = services.GetRequiredService<CustomConfigurationDbContext>();
 
-            if (!configurationDbContext.Clients.Any())
+            _logger.LogInformation("初始化Clients");
+            if (configurationDbContext.Clients.Any())
             {
-                foreach (var client in IdpConfig.GetClients(configiration))
-                {
-                    await configurationDbContext.Clients.AddAsync(client.ToEntity());
-                }
-                await configurationDbContext.SaveChangesAsync();
+                configurationDbContext.Clients.RemoveRange(await configurationDbContext.Clients.ToArrayAsync());
             }
 
-            if (!configurationDbContext.ApiResources.Any())
+            foreach (var client in IdpConfig.GetClients(configiration))
             {
-                foreach (var api in IdpConfig.GetApiResources())
-                {
-                    await configurationDbContext.ApiResources.AddAsync(api.ToEntity());
-                }
-                await configurationDbContext.SaveChangesAsync();
+                await configurationDbContext.Clients.AddAsync(client.ToEntity());
             }
 
-            if (!configurationDbContext.ApiScopes.Any())
+            await configurationDbContext.SaveChangesAsync();
+
+            _logger.LogInformation("初始化ApiResources");
+            if (configurationDbContext.ApiResources.Any())
             {
-                foreach (var api in IdpConfig.GetApiScopes())
-                {
-                    await configurationDbContext.ApiScopes.AddAsync(api.ToEntity());
-                }
-                await configurationDbContext.SaveChangesAsync();
+                configurationDbContext.ApiResources.RemoveRange(
+                    await configurationDbContext.ApiResources.ToArrayAsync());
             }
 
-            if (!configurationDbContext.IdentityResources.Any())
+            foreach (var api in IdpConfig.GetApiResources())
             {
-                foreach (var identity in IdpConfig.GetIdentityResources())
-                {
-                    await configurationDbContext.IdentityResources.AddAsync(identity.ToEntity());
-                }
-                await configurationDbContext.SaveChangesAsync();
+                await configurationDbContext.ApiResources.AddAsync(api.ToEntity());
             }
+
+            await configurationDbContext.SaveChangesAsync();
+
+            _logger.LogInformation("初始化ApiScopes");
+            if (configurationDbContext.ApiScopes.Any())
+            {
+                configurationDbContext.ApiScopes.RemoveRange(await configurationDbContext.ApiScopes.ToArrayAsync());
+            }
+
+            foreach (var api in IdpConfig.GetApiScopes())
+            {
+                await configurationDbContext.ApiScopes.AddAsync(api.ToEntity());
+            }
+
+            await configurationDbContext.SaveChangesAsync();
+
+            _logger.LogInformation("初始化IdentityResources");
+            if (configurationDbContext.IdentityResources.Any())
+            {
+                configurationDbContext.IdentityResources.RemoveRange(await configurationDbContext.IdentityResources
+                    .ToArrayAsync());
+            }
+
+            foreach (var identity in IdpConfig.GetIdentityResources())
+            {
+                await configurationDbContext.IdentityResources.AddAsync(identity.ToEntity());
+            }
+
+            await configurationDbContext.SaveChangesAsync();
         }
     }
 }

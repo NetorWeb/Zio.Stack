@@ -15,15 +15,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "WSL": {
-      "commandName": "WSL2",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:5001/doc",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "distributionName": ""
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
@@ -32,7 +23,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:5001",
-      "sslPort": 5002
+      "sslPort": 0
     }
   }
 }
